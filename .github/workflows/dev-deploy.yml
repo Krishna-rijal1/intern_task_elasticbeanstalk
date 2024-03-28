@@ -110,7 +110,7 @@ jobs:
       
 
       - name: Generate Deployment Package
-        run: zip -r todo.zip mern-todo
+        run: cd mern-todo && zip -r todo.zip *
 
       - name: Terraform Initialize
         run: terraform init
