@@ -103,7 +103,7 @@ jobs:
         run: terraform --version
 
       - name : Test command
-        run : pwd
+        run : pwd | ls
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
