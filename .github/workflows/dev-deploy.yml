@@ -102,6 +102,9 @@ jobs:
       - name: Verify Terraform version
         run: terraform --version
 
+      - name : Test command
+        run : pwd
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
