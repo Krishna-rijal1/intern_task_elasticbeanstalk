@@ -1,9 +1,9 @@
 module "vpc" {
-  source = "./modules/vpc"
+  source = "./Modules/vpc"
 }
 
 module "Ebs" {
-  source     = "./modules/Ebs"
+  source     = "./Modules/Ebs"
   vpc_id     = module.vpc.vpc_id
   subnet1_id = module.vpc.subnet1_id
   # changes on modules
