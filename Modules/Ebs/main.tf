@@ -52,8 +52,8 @@ resource "aws_s3_bucket" "app_code" {
 }
 resource "aws_s3_object" "node_app" {
   bucket = aws_s3_bucket.app_code.id
-  key    = "todo-code.zip"
-  source = "/Users/manish/Downloads/mern-todo/todo-code.zip"
+  key    = "todo.zip"
+  source = "./"
 }
 
 # Elastic Beanstalk application

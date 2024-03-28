@@ -1,0 +1,60 @@
+name: Deploy to Development
+
+on:
+ push:
+    branches:
+      - dev
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+env:
+  awsRegion: "us-east-1"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check terraform code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.awsRegion }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          role-duration-seconds: 1200
+          role-session-name: MySessionName
+
+      - name: Set up terraform
+        uses: hashicorp/setup-terraform@v3
+
+
+      - name: Verify Terraform version
+        run: terraform --version
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Genrate Deployment Package
+        run: zip -r todo.zip mern-todo
+
+      - name: Terraform init
+        run: terraform init
+          
+      - name: Terraform validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+      
+      - name: Terraform apply
+        run: terraform  apply --auto-approve
+
+
+      

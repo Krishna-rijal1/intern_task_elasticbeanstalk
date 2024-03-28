@@ -33,3 +33,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 commands.txt
+
+*node_modules**
+todo.zip
