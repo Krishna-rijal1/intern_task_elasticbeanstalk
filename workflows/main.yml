@@ -1,0 +1,24 @@
+name: Deploy Node.js App to Elastic Beanstalk
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+      - prod
+  pull_request:
+    branches:
+      - dev 
+      - prod
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+env:
+  awsRegion: "us-east-1"
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [20]
